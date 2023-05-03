@@ -1,0 +1,29 @@
+title: Wscript.exe Suspicious Execution
+id: b9eb533e-a541-4e43-861a-cc2233cc4490
+status: test
+description: here
+references:
+    - https://dphish.com/2023/01/07/qbot-from-pdf-to-wsf-execution-between-the-analysis-and-emulation/
+author: Abdlenaser Khanafeer
+date: 2023/03/05
+tags:
+    - attack.initial_access
+    - attack.t1566.001
+    - attack.execution
+    - attack.t1059
+logsource:
+    category: process_creation
+    product: windows
+detection:
+    selection:
+        - ParentImage|endswith:
+            - '\wscript.exe'
+        - Image|endswith:
+              - '\rundll.exe'
+              - '\cmd.exe'
+              - '\powershell.exe'
+              - '\mshta.exe'
+    condition: selection
+falsepositives:
+    - Download legitimate files
+level: high
