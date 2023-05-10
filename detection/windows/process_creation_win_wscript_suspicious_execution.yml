@@ -25,5 +25,5 @@ detection:
               - '\mshta.exe'
     condition: selection
 falsepositives:
-    - Download legitimate files
+    - Unknown
 level: high

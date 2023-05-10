@@ -1,0 +1,22 @@
+title: Download ISO Files
+id: a1e8ae94-01f4-491e-8bfa-0165fcf7769e
+status: production
+description: Detects the download of ISO files via browsers or email clients
+references:
+author: Abdelnaser Khanafeer
+date: 2023/05/10
+tags:
+    - attack.initial_access
+    - attack.t1059
+logsource:
+    product: windows
+    category: create_stream_hash
+detection:
+    selection:
+        TargetFilename|endswith:
+            - '.iso:Zone.Identifier'
+            - '.iso'
+    condition: selection
+falsepositives:
+    - Legitimate downloads
+level: medium

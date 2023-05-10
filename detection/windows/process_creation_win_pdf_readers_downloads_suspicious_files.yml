@@ -35,5 +35,5 @@ detection:
             - 'http*.ps1'
     condition: selection
 falsepositives:
-    - Download legitimate files
+    - Unknown
 level: high
