@@ -1,7 +1,7 @@
 title: Wscript.exe Suspicious Execution
 id: b9eb533e-a541-4e43-861a-cc2233cc4490
 status: test
-description: here
+description: In a recent Phishing campaign in December 2022, Qbot used one of the longest series of stages to reach the malicious payload, starting from sending an email containing a PDF which upon user click opens a URL that directly downloads a password-protected zip file, which contains an ISO file that after mounting it, it shows to the user a WSF file that run a job containing VBScript and Jscript code which invokes another Jscript code.
 references:
     - https://dphish.com/2023/01/07/qbot-from-pdf-to-wsf-execution-between-the-analysis-and-emulation/
 author: Abdlenaser Khanafeer
