@@ -2,7 +2,7 @@ name: "Greeting with email instead of real name"
 description: |
   An urgent request to change or verify the password is detected by machine learning modules as an attempt to steal credentials.
 authors:
-  - linkedin: karem-ali-14a14910b
+  - twitter: KaremAliFaisal
 type: "rule"
 severity: "medium"
 source: |
