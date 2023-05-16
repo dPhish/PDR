@@ -16,7 +16,7 @@ source: |
           and length(filter(.scan.strings.strings, regex.match(.,'.*\(http.*'))) == 1
           and length(filter(.scan.strings.strings, regex.match(.,'.*\/Type\/XObject\/Subtype\/Image\/.*'))) >= 1
           )   
-)
+   )
 tags:
   - "SUSPICIOUS ATTACHMENT"
   - "Qakbot"
