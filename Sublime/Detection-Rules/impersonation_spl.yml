@@ -2,7 +2,7 @@ name: "Brand impersonation: SPL"
 description: |
   Brand Impersonation of the Saudi Post SPL-سبل.
 authors:
-  - linkedin: karem-ali-14a14910b
+  - twitter: KaremAliFaisal
 type: "rule"
 severity: "high"
 source: |

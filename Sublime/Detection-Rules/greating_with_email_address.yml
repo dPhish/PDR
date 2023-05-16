@@ -2,7 +2,7 @@ name: "Greeting with email instead of real name"
 description: |
   the greeting at the beginning of the email with the recipient's email address ex: Hi support@dphish.com instead of Hi support team.
 authors:
-  - linkedin: karem-ali-14a14910b
+  - twitter: KaremAliFaisal
 type: "rule"
 severity: "medium"
 source: |
