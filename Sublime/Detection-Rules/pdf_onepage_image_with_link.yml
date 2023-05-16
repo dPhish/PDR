@@ -4,7 +4,7 @@ description: |
 references:
   - https://dphish.com/2023/01/07/qbot-from-pdf-to-wsf-execution-between-the-analysis-and-emulation/
 authors:
-  - linkedin: karem-ali-14a14910b
+  - twitter: KaremAliFaisal
 type: "rule"
 severity: "medium"
 source: |
