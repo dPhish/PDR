@@ -1,0 +1,18 @@
+name: "Brand impersonation: SPL"
+description: |
+  Brand Impersonation of the Saudi Post SPL-سبل.
+authors:
+  - linkedin: karem-ali-14a14910b
+type: "rule"
+severity: "high"
+source: |
+  type.inbound
+  and (
+      regex.icontains(sender.display_name, '\bSPL\b') 
+      or regex.icontains(sender.display_name,'S\s+P\s+L')
+      or strings.ilike(sender.email.domain.domain, '*SPL*')
+      or strings.ilike(subject.subject, '*سبل*')
+      or strings.ilike(subject.subject, '*البريد السعود*')
+      
+  )
+  and sender.email.domain.root_domain not in~ ('splonline.com.sa')

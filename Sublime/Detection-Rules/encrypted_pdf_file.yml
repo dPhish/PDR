@@ -1,0 +1,16 @@
+name: "Attachment: Encrypted PDF file"
+description: |
+  Threat actors often employ encrypted PDF files to get around security controls, so if the email comes from an unknown source and isn't supposed to include sensitive information, it's probably a phishing attempt.
+authors:
+  - linkedin: karem-ali-14a14910b
+type: "rule"
+severity: "medium"
+source: |
+  type.inbound
+  and any(attachments, .file_extension == "pdf"
+    and any(file.explode(.),
+    any(.scan.strings.strings, strings.ilike(., '*Encrypt*'))
+    )
+) 
+tags:
+  - "Suspicious attachment"

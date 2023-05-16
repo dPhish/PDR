@@ -1,0 +1,15 @@
+name: "Greeting with email instead of real name"
+description: |
+  An urgent request to change or verify the password is detected by machine learning modules as an attempt to steal credentials.
+authors:
+  - linkedin: karem-ali-14a14910b
+type: "rule"
+severity: "medium"
+source: |
+  type.inbound
+  and any([body.plain.raw, body.html.inner_text], any(ml.nlu_classifier(.).entities, .name == "request")
+      and any(ml.nlu_classifier(.).entities, .name == "urgency")
+      and any(ml.nlu_classifier(.).intents, .name =="cred_theft")
+      ) 
+tags:
+  - "CREDENTIAL PHISHING"

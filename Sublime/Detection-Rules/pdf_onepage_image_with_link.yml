@@ -1,0 +1,23 @@
+name: "Attachment: PDF File consist of only 1 page with a image points to a link"
+description: |
+  PDF file contains only 1 page with a link and image. which is not usual with legitmate pdfs.
+references:
+  - https://dphish.com/2023/01/07/qbot-from-pdf-to-wsf-execution-between-the-analysis-and-emulation/
+authors:
+  - linkedin: karem-ali-14a14910b
+type: "rule"
+severity: "medium"
+source: |
+  type.inbound 
+    and any(attachments, .file_extension == "pdf"
+      and any(file.explode(.),
+          .scan.exiftool.page_count ==1
+          and .depth == 0
+          and length(filter(.scan.strings.strings, regex.match(.,'.*\(http.*'))) == 1
+          and length(filter(.scan.strings.strings, regex.match(.,'.*\/Type\/XObject\/Subtype\/Image\/.*'))) >= 1
+          )   
+)
+tags:
+  - "SUSPICIOUS ATTACHMENT"
+  - "Qbot"
+  - "IcedID"
