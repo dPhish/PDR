@@ -4,15 +4,38 @@ description: |
 authors:
   - twitter: KaremAliFaisal
 type: "rule"
-severity: "high"
+severity: "low"
 source: |
   type.inbound
   and (
+      //Sender
       regex.icontains(sender.display_name, '\bSPL\b') 
       or regex.icontains(sender.display_name,'S\s+P\s+L')
       or strings.ilike(sender.email.domain.domain, '*SPL*')
+
+      //Subject
       or strings.ilike(subject.subject, '*سبل*')
       or strings.ilike(subject.subject, '*البريد السعود*')
+
+      //Links
+      or any(body.links, 
+          strings.icontains(.href_url.url,"spl") or
+          strings.ilevenshtein(.href_url.url,"spl") <= 2
+          )
+
+      //Body
+      or (strings.icontains(body.plain.raw, 'البريد السعود') 
+          and (strings.icontains(subject.subject, 'طلب')
+              or  strings.icontains(subject.subject, 'طرد')
+              ) 
+          )
+      or (strings.icontains(body.html.raw, 'البريد السعود')
+          and (strings.icontains(subject.subject, 'طلب')
+              or strings.icontains(subject.subject, 'طرد')
+              ) 
+          )
       
   )
   and sender.email.domain.root_domain not in~ ('splonline.com.sa')
+
+
