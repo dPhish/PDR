@@ -19,8 +19,8 @@ source: |
 
       //Links
       or any(body.links, 
-          strings.icontains(.href_url.url,"spl") or
-          strings.ilevenshtein(.href_url.url,"spl") <= 2
+          strings.icontains(.href_url.domain.domain,"spl") or
+          strings.ilevenshtein(.href_url.domain.domain,"spl") <= 2
           )
 
       //Body
