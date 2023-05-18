@@ -1,6 +1,4 @@
-garbage.zip
 hora_saldos_medios_2023051808.csv.zip
-foresight.zip
 2023-05-17-scan_http-ingeteam_rhost-rhost.csv.zip
 4_hour_metpcdailylead_20230518_040201.csv.zip
 abbott_url_click_20230427.csv.zip
@@ -13,7 +11,6 @@ d_liftrevenue_20230515025242.csv.zip
 81371_249759_sup_services_20230518_042812.csv.zip
 pasted.zip
 securitylogs.zip
-www.canary.zip
 b_202303_0518.docx.zip
 archivx.zip
 31may2023.pdf.zip
@@ -420,7 +417,6 @@ www.htm.zip
 cirkelregiodeachterhoek.zip
 catmemes.zip
 xtrct.zip
-zipworld.zip
 windowblinds.zip
 wildflower.zip
 wichtig.zip
@@ -432,7 +428,6 @@ tsundere.zip
 austin.ubuntuiso.zip
 ubuntuiso.zip
 bcextpra01_ca606_20220712t120843.csv.zip
-totallynotmalicious.zip
 millionaire.zip
 marketer.zip
 marvelous.zip
@@ -497,7 +492,6 @@ powerhouse.zip
 pandora.zip
 tiernan.zip
 tr.cer.zip
-
 document-download.zip
 nr.zip
 ahp.zip
@@ -612,9 +606,6 @@ steamclient.zip
 secure-pdf.zip
 latestversion.zip
 keychain.zip
-atzipcodewilmington.com
-zipadeedoodah.zip
-mjarzipan.com
 neo4j.zip
 apks.zip
 microsoftinstaller.zip
