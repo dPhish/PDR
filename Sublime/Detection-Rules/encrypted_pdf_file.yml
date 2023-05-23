@@ -9,8 +9,9 @@ source: |
   type.inbound
   and any(attachments, .file_extension == "pdf"
       and any(file.explode(.),
-      any(.scan.strings.strings, strings.ilike(., '*Encrypt*'))
+      any(.scan.strings.strings, regex.icontains(., '/Encrypt'))
   )
   ) 
+
 tags:
   - "Suspicious attachment"
