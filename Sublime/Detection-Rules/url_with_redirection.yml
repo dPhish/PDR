@@ -1,0 +1,17 @@
+name: "URL with redirection"
+description: |
+  Detect the presence of a domain in the URL parameters, as this indicates a redirection, meanwhile, attackers use open redirection to host their phishing domains on a legitimate domain to bypass email security controls.
+references:
+  - https://www.linkedin.com/feed/update/urn:li:activity:7041818298690252800
+authors:
+  - twitter: KaremAliFaisal
+type: "rule"
+severity: "low"
+source: |
+    type.inbound
+    and any(body.links,
+        regex.icontains(.href_url.query_params,'\w+\.(?:com|us|org|live|io|co)%2F')
+        //exclude domains of email security appliance that host all delivered url on thier domains. 
+        and .href_url.domain.root_domain not in~ ("fireeye.com","urldefense.com","trendmicro.com")) 
+tags:
+  - "Open Redirect"
