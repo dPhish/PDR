@@ -1,42 +1,50 @@
-type.inbound
-and (
-    //Sender
-    regex.icontains(sender.display_name, '\bSPL\b') 
-    or regex.icontains(sender.display_name,'S\s+P\s+L')
-    or strings.ilike(sender.email.domain.domain, '*SPL*')
-    or strings.ilike(sender.display_name, '*سبل*')
-    or strings.ilike(sender.display_name, '*البريد السعود*')
-    or strings.ilike(sender.display_name, '*Saudi*Post*')
-    //Subject
-    or strings.ilike(subject.subject, '*سبل*')
-    or strings.ilike(subject.subject, '*البريد السعود*')
-    or strings.ilike(subject.subject, '*spl*')
-    or strings.ilike(subject.subject, '*Saudi*Post*')
-    //Links
-    or any(body.links, 
-        strings.icontains(.href_url.domain.domain,"spl") or
-        strings.ilevenshtein(.href_url.domain.domain,"spl") <= 2
-        )
+name: "Brand impersonation: SPL"
+description: |
+  Brand Impersonation of the Saudi Post SPL-سبل.
+authors:
+  - twitter: KaremAliFaisal
+type: "rule"
+severity: "high"
+source: |
+    type.inbound
+    and (
+        //Sender
+        regex.icontains(sender.display_name, '\bSPL\b') 
+        or regex.icontains(sender.display_name,'S\s+P\s+L')
+        or strings.ilike(sender.email.domain.domain, '*SPL*')
+        or strings.ilike(sender.display_name, '*سبل*')
+        or strings.ilike(sender.display_name, '*البريد السعود*')
+        or strings.ilike(sender.display_name, '*Saudi*Post*')
+        //Subject
+        or strings.ilike(subject.subject, '*سبل*')
+        or strings.ilike(subject.subject, '*البريد السعود*')
+        or strings.ilike(subject.subject, '*spl*')
+        or strings.ilike(subject.subject, '*Saudi*Post*')
+        //Links
+        or any(body.links, 
+            strings.icontains(.href_url.domain.domain,"spl") or
+            strings.ilevenshtein(.href_url.domain.domain,"spl") <= 2
+            )
 
-    //Body
-    or (strings.icontains(body.plain.raw, 'البريد السعود') 
-        and (strings.icontains(subject.subject, 'طلب')
-            or  strings.icontains(subject.subject, 'طرد')
-            ) 
-        )
-    or ((strings.icontains(body.html.raw, 'البريد السعود')
-        or strings.icontains(body.html.raw, 'SPL')
-        or strings.ilike(body.html.raw, '*Saudi*Post*')
-        )
-        and (strings.icontains(subject.subject, 'طلب')
-            or strings.icontains(subject.subject, 'طرد')
-            or strings.icontains(subject.subject, 'parcel')
-            or strings.icontains(subject.subject, 'طرد')
-            or any(body.links, strings.icontains(.display_text,"ستلام"))
+        //Body
+        or (strings.icontains(body.plain.raw, 'البريد السعود') 
+            and (strings.icontains(subject.subject, 'طلب')
+                or  strings.icontains(subject.subject, 'طرد')
+                ) 
+            )
+        or ((strings.icontains(body.html.raw, 'البريد السعود')
+            or strings.icontains(body.html.raw, 'SPL')
+            or strings.ilike(body.html.raw, '*Saudi*Post*')
+            )
+            and (strings.icontains(subject.subject, 'طلب')
+                or strings.icontains(subject.subject, 'طرد')
+                or strings.icontains(subject.subject, 'parcel')
+                or strings.icontains(subject.subject, 'طرد')
+                or any(body.links, strings.icontains(.display_text,"ستلام"))
 
 
-            ) 
-        )
-    
-)
-and sender.email.domain.root_domain not in~ ('splonline.com.sa')
+                ) 
+            )
+        
+    )
+    and sender.email.domain.root_domain not in~ ('splonline.com.sa')
