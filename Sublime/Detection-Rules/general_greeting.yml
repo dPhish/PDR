@@ -1,0 +1,11 @@
+name: "Greeting with email instead of real name"
+description: |
+  Email starting with open greeting instead of the user name
+authors:
+  - twitter: KaremAliFaisal
+type: "rule"
+source: |
+  type.inbound
+  and regex.icontains(body.html.display_text, '(?:Hi|Dear|Hello|Attention:)\s+(?:User|Customer|Valued Customer)') 
+tags:
+  - "INFORMATION"
