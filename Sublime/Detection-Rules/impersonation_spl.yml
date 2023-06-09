@@ -4,7 +4,7 @@ description: |
 authors:
   - twitter: KaremAliFaisal
 type: "rule"
-severity: "high"
+severity: "medium"
 source: |
     type.inbound
     and (
@@ -48,3 +48,5 @@ source: |
         
     )
     and sender.email.domain.root_domain not in~ ('splonline.com.sa')
+tags:
+  - "BRAND IMPERSONATION"

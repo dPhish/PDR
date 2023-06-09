@@ -1,0 +1,29 @@
+name: "Brand impersonation: SADAD"
+description: |
+  Brand Impersonation of SADAD.
+authors:
+  - twitter: KaremAliFaisal
+type: "rule"
+severity: "high"
+source: |
+    type.inbound
+    and (
+        //Sender
+        regex.icontains(sender.display_name, '\bsadad\b') 
+        or regex.icontains(sender.display_name,'S\s+P\s+L')
+        or strings.ilike(sender.email.domain.domain, '*sadad*')
+
+        //Subject
+        or strings.ilike(subject.subject, '*sadad*')
+
+        //Links
+        or any(body.links, 
+            strings.icontains(.href_url.url,"sadad") or
+            strings.ilevenshtein(.href_url.url,"sadad") <= 2
+            )
+
+    )
+    and sender.email.domain.root_domain not in~ ('sadad.com')
+
+tags:
+  - "BRAND IMPERSONATION"

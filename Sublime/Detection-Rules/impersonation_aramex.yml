@@ -1,0 +1,29 @@
+name: "Brand impersonation: Aramex"
+description: |
+  Brand Impersonation: Aramex
+authors:
+  - twitter: KaremAliFaisal
+type: "rule"
+severity: "medium"
+source: |
+    type.inbound
+    and (
+        //Sender
+        regex.icontains(sender.display_name, '\baramex\b') 
+        or regex.icontains(sender.display_name,'S\s+P\s+L')
+        or strings.ilike(sender.email.domain.domain, '*aramex*')
+
+        //Subject
+        or strings.ilike(subject.subject, '*aramex*')
+        or strings.ilike(subject.subject, '*رامكس*')
+        //Links
+        or any(body.links, 
+            strings.icontains(.href_url.url,"aramex") or
+            strings.ilevenshtein(.href_url.url,"aramex") <= 2
+            )
+
+        
+    )
+    and sender.email.domain.root_domain not in~ ('aramex.com')
+tags:
+  - "BRAND IMPERSONATION"

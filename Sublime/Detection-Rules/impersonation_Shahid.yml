@@ -1,0 +1,36 @@
+name: "Brand impersonation: Shahid"
+description: |
+  Impersonation Shahid
+authors:
+  - twitter: KaremAliFaisal
+type: "rule"
+severity: "medium"
+source: |
+    type.inbound
+    and (
+        //Sender
+        regex.icontains(sender.display_name, '\bShahid\b') 
+        or strings.ilike(sender.email.domain.domain, '*Shahid*')
+        or strings.ilike(sender.email.domain.domain, '*شاهد*')
+        //Subject
+        or strings.ilike(subject.subject, '*شاهد*')
+        or strings.ilike(subject.subject, '*Shahid*')
+
+        //Links
+        or any(body.links, 
+            strings.icontains(.href_url.url,"shahid") or
+            strings.ilevenshtein(.href_url.url,"shahid") <= 2
+            )
+
+        //Body
+        or (strings.icontains(body.plain.raw, 'شاهد')) 
+
+        or (strings.icontains(body.html.inner_text, 'شاهد '))
+
+        
+    )
+    and sender.email.domain.root_domain not in~ ('shahid.mbc.net')
+
+
+tags:
+  - "BRAND IMPERSONATION"

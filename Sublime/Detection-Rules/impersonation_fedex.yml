@@ -1,0 +1,22 @@
+name: "Brand impersonation: Fedex"
+description: |
+  This rule detects spam emails impersonating FedEx
+authors:
+  - twitter: KaremAliFaisal
+type: "rule"
+severity: "medium"
+source: |
+        type.inbound
+    and (
+
+        strings.icontains(sender.display_name,"fedex") or
+        strings.icontains(sender.display_name,"فيديكس") or 
+        strings.icontains(subject.subject, "fedex") or
+        strings.icontains(subject.subject, "فيديكس")
+        
+    )
+    and sender.email.domain.root_domain !~ 'fedex.com'
+    and sender.email.email not in $recipient_emails
+
+tags:
+  - "BRAND IMPERSONATION"

@@ -1,0 +1,17 @@
+name: "Brand impersonation: DHL"
+description: |
+  Impersonation of the shipping provider DHL.
+authors:
+  - twitter: KaremAliFaisal
+type: "rule"
+severity: "High"
+source: |
+    type.inbound
+    and (
+        regex.icontains(sender.display_name, '\bDHL\b') 
+        or strings.ilike(sender.email.domain.domain, '*DHL*')
+        or strings.ilike(subject.subject, '*DHL notification*')
+    )
+    and sender.email.domain.root_domain not in~ ('dhl.com', 'dhl-news.com', 'bdhllp.com', 'dhlparcel.co.uk', 'dhlecs.com', 'dhl.co.uk', 'dpdhl.com', 'dhl.de', 'dhl.fr')
+tags:
+  - "BRAND IMPERSONATION"
