@@ -19,7 +19,10 @@ source: |
         //Links
         or any(body.links, 
             strings.icontains(.href_url.url,"shahid") or
-            strings.ilevenshtein(.href_url.url,"shahid") <= 2
+            strings.ilevenshtein(.href_url.url,"shahid") <= 2 or
+            (
+                regex.icontains(.display_url.url,'shahid.net','shahid.mbc.net') and .mismatched == true
+            )
             )
 
         //Body
@@ -29,7 +32,8 @@ source: |
 
         
     )
-    and sender.email.domain.root_domain not in~ ('shahid.mbc.net')
+    and sender.email.domain.root_domain not in~ ('shahid.mbc.net', 'shahid.net')
+
 
 
 tags:

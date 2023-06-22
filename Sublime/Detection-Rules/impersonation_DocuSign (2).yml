@@ -1,0 +1,18 @@
+name: "Brand impersonation: DocuSign (2)"
+description: |
+  Attack impersonating a DocuSign request for signature.
+authors:
+  - twitter: KaremAliFaisal
+type: "rule"
+severity: "low"
+source: |
+    type.inbound 
+
+    and any(attachments, any(file.explode(.), 
+            regex.icontains(.scan.ocr.raw,"Docusign","docu sign")
+            and regex.icontains(.scan.ocr.raw, "review")            
+          )
+    )
+
+tags:
+  - "BRAND IMPERSONATION"

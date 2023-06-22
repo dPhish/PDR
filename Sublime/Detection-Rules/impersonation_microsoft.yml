@@ -1,6 +1,6 @@
-name: "Brand impersonation: SPL"
+name: "Brand Impersonation: Microsoft (Microsoft Logo)"
 description: |
-  Brand Impersonation of the Saudi Post SPL-سبل.
+  Detecting the Presence of Microsoft Logo from non-Microsoft email.
 authors:
   - twitter: KaremAliFaisal
 type: "rule"

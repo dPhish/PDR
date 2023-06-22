@@ -1,0 +1,35 @@
+name: "Brand impersonation: Facebook  (2)"
+description: |
+  Impersonation of Facebook.
+authors:
+  - twitter: KaremAliFaisal
+type: "rule"
+severity: "low"
+source: |
+        type.inbound
+        and (
+            //Sender
+            regex.icontains(sender.display_name, '\bfacebook\b','فيسبوك,''فيس بوك , ''face\s+book') 
+            or regex.icontains(sender.email.domain.domain, 'facebbok')
+            or strings.levenshtein(sender.display_name,'facebook') <= 3
+            or strings.levenshtein(sender.display_name,'facebook.com') <= 3
+
+            //Subject
+            or (
+                regex.icontains(subject.subject, 'facebook')
+                and 
+                regex.icontains(subject.subject, 'suspend', 'suggest')
+            )
+
+            //Links
+            or any(body.links, 
+                strings.icontains(.href_url.domain.domain,"facebook") or
+                strings.ilevenshtein(.href_url.domain.domain,"facebook.com") <= 3
+                )
+          
+        )
+        and sender.email.domain.root_domain not in~ ('facebook.com','facebookmail.com', 'eventsatfacebook.com', 'facebookenterprise.com')
+
+
+tags:
+  - "BRAND IMPERSONATION"
