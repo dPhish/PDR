@@ -6,7 +6,7 @@ authors:
 type: "rule"
 severity: "medium"
 source: |
-        type.inbound
+    type.inbound
     and (
 
         strings.icontains(sender.display_name,"fedex") or
