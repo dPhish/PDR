@@ -23,7 +23,6 @@ source: |
 
             //Links
             or any(body.links, 
-                strings.icontains(.href_url.domain.domain,"facebook") or
                 strings.ilevenshtein(.href_url.domain.domain,"facebook.com") <= 3
                 )
           
