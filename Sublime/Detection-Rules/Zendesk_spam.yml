@@ -6,9 +6,9 @@ authors:
 type: "rule"
 severity: "low"
 source: |
- type.inbound
-and sender.email.domain.root_domain == "zendesk.com" and 
-sender.email.domain.root_domain != sender.email.domain.domain
+  type.inbound
+  and sender.email.domain.root_domain == "zendesk.com" and 
+  sender.email.domain.root_domain != sender.email.domain.domain
 
 
 tags:
