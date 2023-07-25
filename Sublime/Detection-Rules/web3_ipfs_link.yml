@@ -1,0 +1,16 @@
+name: "Web3 (IPFS) URL"
+description: |
+  IPFS(web3) is a peer-to-peer file-sharing service with no centralizing point storing the data 𝐰𝐡𝐢𝐜𝐡 𝐦𝐚𝐤𝐞𝐬 𝐭𝐚𝐤𝐢𝐧𝐠 𝐝𝐨𝐰𝐧 𝐚 𝐟𝐚𝐤𝐞 𝐰𝐞𝐛𝐬𝐢𝐭𝐞 𝐨𝐧 𝐢𝐭 𝐯𝐞𝐫𝐲 𝐝𝐢𝐟𝐟𝐢𝐜𝐮𝐥𝐭, accordingly, threat actors start using IPFS to host their phishing link.
+references:
+  - https://www.linkedin.com/feed/update/urn:li:activity:7041818298690252800
+authors:
+  - twitter: KaremAliFaisal
+type: "rule"
+severity: "medium"
+source: |
+  type.inbound
+  and any(body.links,
+      strings.icontains(.href_url.url, "ipfs")
+  )
+tags:
+  - "SUSPICIOUS LINK"

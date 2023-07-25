@@ -1,0 +1,15 @@
+name: "Zendesk sender domain"
+description: |
+  Branded companies will not use a subdomain of zendesk to send emails but will register their domains with zendesk to send emails using their own domain names. it was observed that many threat actors use zendesk (ex: example.zendesk.com) to send spam.
+authors:
+  - twitter: KaremAliFaisal
+type: "rule"
+severity: "low"
+source: |
+ type.inbound
+and sender.email.domain.root_domain == "zendesk.com" and 
+sender.email.domain.root_domain != sender.email.domain.domain
+
+
+tags:
+  - "SPAM"

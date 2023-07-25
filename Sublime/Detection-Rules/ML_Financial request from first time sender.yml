@@ -1,0 +1,30 @@
+name: "ML: Financial request from first time sender"
+description: |
+  Financial request from first-time sender.
+authors:
+  - twitter: KaremAliFaisal
+type: "rule"
+severity: "medium"
+source: |
+    type.inbound
+    and any([body.plain.raw, body.html.inner_text], 
+      any(ml.nlu_classifier(.).entities,
+        .name == "financial" )
+        and any(ml.nlu_classifier(.).entities,
+        .name == "request" 
+      )
+    )
+    
+    // first time sender
+    and (
+        (
+            sender.email.domain.root_domain in $free_email_providers
+            and sender.email.email not in $sender_emails
+        )
+        or (
+            sender.email.domain.root_domain not in $free_email_providers
+            and sender.email.domain.domain not in $sender_domains
+        )
+    )
+tags:
+  - "FRAUD"

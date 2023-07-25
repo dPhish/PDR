@@ -1,0 +1,19 @@
+name: "Marketing Email"
+description: |
+  Detect marketing email
+authors:
+  - twitter: KaremAliFaisal
+type: "rule"
+source: |
+    type.inbound
+    and 
+    (
+        regex.icontains(subject.subject,"newsletter","marketing","training","course","دورات","تدريب", "workshop","webinar","spam","survay","masterclass",  "agenda","news","conference","ifrs update","workshop","دورة","train","مؤتمر","summit","seminar ") 
+    or any([sender.email.local_part,sender.email.domain.domain, sender.display_name],regex.icontains(.,"training","marketing","sales","market","course","train","تدريب","ifrsupdates","seminar",'دورة','دورات'))
+
+    or any([body.html.inner_text,body.plain.raw], regex.icontains(.,"newsletter"))
+
+    or sender.email.domain.root_domain in ("    dentistpredict.shop",'coventryuk.org')
+    )
+tags:
+  - "INFORMATION"

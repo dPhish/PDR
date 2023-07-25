@@ -1,0 +1,14 @@
+name: "Email contains only image"
+description: |
+  Emails containing only images could be marketing or phishing, but it's rare to be otherwise.
+authors:
+  - twitter: KaremAliFaisal
+type: "rule"
+severity: "low"
+source: |
+      type.inbound
+      // 170 is the length of the annotation added by SMG for external emails, adjust it according to your SMG message.
+      and length(body.html.inner_text) < 170
+      and strings.icontains(body.html.raw,"<img")
+tags:
+  - "SPAM"

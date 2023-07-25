@@ -1,0 +1,16 @@
+name: "Link hosted on google translate to translate from English to English"
+description: |
+  Detect google translate links that translate English to English as threat actors use Google Translate to host their fake URLs to deceive the users and bypass security controls.
+references:
+  - https://www.linkedin.com/posts/karem-ali-14a14910b_phishing-dphish-activity-7039650023411789826-Qv17?utm_source=share&utm_medium=member_desktop
+authors:
+  - twitter: KaremAliFaisal
+type: "rule"
+severity: "high"
+source: |
+ type.inbound
+  and any(body.links,
+              strings.icontains(.href_url.url,"translate.goog")   and 
+                  strings.icontains(.href_url.url, "_x_tr_tl%3Den")and  
+                  strings.icontains(.href_url.url, "_x_tr_hl%3Den")
+          ) 

@@ -1,0 +1,15 @@
+name: "Shipment notification from non shipping agency"
+description: |
+  Shippment fake notification is widely used for phishing. this rule detects shipment notification from not shipment delivery. Add the shipping agency to the domain whitelist according to your region.
+authors:
+  - twitter: KaremAliFaisal
+type: "rule"
+severity: "low"
+source: |
+        type.inbound
+        and regex.icontains(subject.subject, "pracel", "Delivery","طرد", "shipment","شحنة","شحنات")
+        and regex.icontains(subject.subject, "Action","waiting","track","تتبع")
+
+        and sender.email.domain.domain not in~  ('dhl.com', 'dhl-news.com', 'bdhllp.com', 'dhlparcel.co.uk', 'dhlecs.com', 'dhl.co.uk', 'dpdhl.com', 'dhl.de', 'dhl.fr', 'fedex.com', 'splonline.com.sa', 'aramex.com', 'smsaexpress.com')
+tags:
+  - "BRAND IMPERSONATION"

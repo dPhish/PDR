@@ -1,4 +1,4 @@
-name: "Greeting with email instead of real name"
+name: "Urgent malicious request to steal credentials"
 description: |
   An urgent request to change or verify the password is detected by machine learning modules as an attempt to steal credentials.
 authors:

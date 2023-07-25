@@ -1,0 +1,39 @@
+name: "Attachment Soliciting user to enable macros [enhanced]"
+description: |
+  Office document asks the user to enable content to run macros.
+authors:
+  - twitter: KaremAliFaisal
+type: "rule"
+severity: "high"
+source: |
+  type.inbound
+    and any(attachments,
+        (
+            .file_extension in~ $file_extensions_macros
+            or .file_extension in~ $file_extensions_common_archives
+        )
+        and any(file.explode(.),
+            strings.ilike(.scan.ocr.raw, "*please*enable*macros")
+            or any(.scan.strings.strings, regex.icontains(., 'please\s+enable macros'))
+
+            or strings.ilike(.scan.ocr.raw, "*Enable*content*")
+            or any(.scan.strings.strings, regex.icontains(., 'Enable\s+content'))
+
+            or strings.ilike(.scan.ocr.raw, "*Enable*Editing*")
+            or any(.scan.strings.strings, regex.icontains(., 'Enable\s+Editing'))
+        )
+    )
+    and (
+        (
+            sender.email.domain.root_domain in $free_email_providers
+            and sender.email.email not in $recipient_emails
+        )
+        or (
+            sender.email.domain.root_domain not in $free_email_providers
+            and sender.email.domain.domain not in $recipient_domains
+        )
+    )
+
+
+tags:
+  - "Suspicious attachment"

@@ -1,0 +1,14 @@
+name: "Credential Theft via PhishKit-X01"
+description: |
+  Some Phishing kits add the email of the target victim in the phishing URL to track the target victim's interaction with the link.
+authors:
+  - twitter: KaremAliFaisal
+type: "rule"
+severity: "medium"
+source: |
+  type.inbound
+  and any(body.links,
+      any(recipients.to, strings.icontains(..href_url.query_params, .email.local_part))
+  )
+tags:
+  - "CREDENTIAL PHISHING"

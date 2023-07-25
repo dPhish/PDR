@@ -1,0 +1,14 @@
+name: "Credential Theft via PhishKit-X01"
+description: |
+  A phishing kit was observred that track the victims interaction with the phishing URL by writing the victim email at the end of the phishing url (ex: maldomain.tld/#email@domain.com
+authors:
+  - twitter: KaremAliFaisal
+type: "rule"
+severity: "High"
+source: |
+    type.inbound
+    and any(body.links,
+        regex.icontains(.href_url.query_params, '\%23[\w\-\.]+%40[\w-]+\.+[\w-]{2,4}')
+    )
+tags:
+  - "CREDENTIAL PHISHING"
