@@ -1,4 +1,4 @@
-name: "Greeting with email instead of real name"
+name: "Email starts with general greeting"
 description: |
   Email starting with open greeting instead of the user name
 authors:
