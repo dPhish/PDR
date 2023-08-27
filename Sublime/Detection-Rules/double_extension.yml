@@ -1,0 +1,22 @@
+name: "Attachment with double extension"
+description: |
+  Attachment or Archive contains a file with double extension to lure users to click on the file.
+authors:
+  - twitter: KaremAliFaisal
+type: "rule"
+source: |
+  type.inbound
+  and (
+      // Attachment file with double extension
+      any(attachments, regex.contains(.file_name,".*\\..*\\..*")) 
+
+      // Archive contains a file with double extension
+      or
+      any(attachments,
+      .file_extension in~ $file_extensions_common_archives
+      and any(file.explode(.), .depth > 0
+          and regex.contains(.file_name,".*\\..*\\..*"))
+  )
+  )
+tags:
+  - "Suspicious Attachment"
