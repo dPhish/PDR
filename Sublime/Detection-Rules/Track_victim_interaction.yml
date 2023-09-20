@@ -1,4 +1,4 @@
-name: "Credential Theft via PhishKit-X01"
+name: "Track Victim Interaction"
 description: |
   Some Phishing kits add the email of the target victim in the phishing URL to track the target victim's interaction with the link.
 authors:
