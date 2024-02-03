@@ -4,7 +4,7 @@ description: |
 authors:
   - twitter: KaremAliFaisal
 type: "rule"
-severity: "High"
+severity: "high"
 source: |
     type.inbound
     and (
